@@ -177,6 +177,7 @@ class BelongsTo extends Relation
 
         foreach ($results as $result) {
             $attribute = $this->getDictionaryKey($result->getAttribute($owner));
+            $attribute = trim(strtolower($attribute));
 
             $dictionary[$attribute] = $result;
         }
@@ -186,6 +187,7 @@ class BelongsTo extends Relation
         // the primary key of the children to map them onto the correct instances.
         foreach ($models as $model) {
             $attribute = $this->getDictionaryKey($model->{$foreign});
+            $attribute = trim(strtolower($attribute));
 
             if (isset($dictionary[$attribute])) {
                 $model->setRelation($relation, $dictionary[$attribute]);
